@@ -1,14 +1,13 @@
 package dpoo2_u2_a3_morr.inventarios;
 
+import dpoo2_u2_a3_morr.db.DBInventarios;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -81,16 +80,39 @@ public class InventariosSubModuleAltas extends JPanel implements ActionListener{
         add(limpiar_boton);
         
     }
+    
+    //METODO PARA LIMPIAR EL FORMULARIO
+    public void LimpiarFormulario(){
+        
+        codigo_field.setText(null);
+        articulo_field.setText(null);
+        sucursal_field.setText(null);
+        existencia_field.setText(null);
+        marca_field.setText(null);
+    
+    }
 
     //SE AGREGAN LAS ACCIONES A LOS BOTONES
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==guardar_boton){
-            System.out.println("inventarios guardar clicked"); 
-            JOptionPane.showMessageDialog(null, "Inventario Guardado");
+            //SE OBTIENEN LOS VALORES DE LOS CAMPOS DEL FORMULARIO
+            //DE SER NCESARIO SE PARSENA DE STRING A INTEGER
+            int codigo = Integer.parseInt(codigo_field.getText());
+            String articulo = articulo_field.getText();
+            String sucursal = sucursal_field.getText();
+            int existencia = Integer.parseInt(existencia_field.getText());
+            String marca = marca_field.getText();
+            //SE CREA UNA INSTANCIA DE LA CLASE QUE INSERTA LOS CAMPOS Y SE LLAMA AL METODO QUE LO HACE
+            DBInventarios db = new DBInventarios();
+            db.insertarInventario(codigo, articulo, sucursal, existencia, marca);
+            //SE LIMPIA EL FORMULARIO
+            LimpiarFormulario();
         }
         if(e.getSource()==limpiar_boton){
             System.out.println("inventarios modificar clicked");
+            //SE LIMPIA EL FORMULARIO
+            LimpiarFormulario();
         }
     }
     
