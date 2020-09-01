@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 //SE CREA LA CLASE DE CONEXION PARA CONECTARSE A LA BASE DE DATOS
 public class DBConexion {
     //SE DECLARAN LAS CARACTERISTICAS DE LA CONEXION
-    public static final String URL = "jdbc:mysql://localhost/restaurante";
+    public static final String URL = "jdbc:mysql://localhost/restaurante2";
     public static final String USER = "root";
     public static final String PASS = "";
     //SE CREA UN METODO DE TIPO CONNECTION PARA CONNECTARSE 
