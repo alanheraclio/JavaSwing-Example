@@ -1,5 +1,8 @@
 package dpoo2_u2_a3_morr.nomina;
 
+import dpoo2_u2_a3_morr.inventarios.InventariosSubModuleAltas;
+import dpoo2_u2_a3_morr.inventarios.InventariosSubModuloBajas;
+import dpoo2_u2_a3_morr.inventarios.InventariosSubModuloModificaciones;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,63 +14,73 @@ public class NominaModulo extends JPanel implements ActionListener{
     
     //SE CREA EL CONTENEDOR DEL MENU DEL MODULO
     public JPanel module = new JPanel();
-    JButton boton_personal, boton_area, salir_boton;
-    
-    //SE CREAN LOS MENUS A PARTIR DE LAS CLASES CON LOS FORMULARIOS
-    NominaSubModulePersonal personal = new NominaSubModulePersonal();
-    NominaSubModuloArea area = new NominaSubModuloArea(); 
+    JButton boton_altas, boton_bajas, boton_modificaciones, salir_boton;
+    InventariosSubModuleAltas altas = new InventariosSubModuleAltas();
+    InventariosSubModuloModificaciones modificaciones = new InventariosSubModuloModificaciones();
+    InventariosSubModuloBajas bajas = new InventariosSubModuloBajas();    
     
     public NominaModulo(){
-        //SE INICIALIZA LA CLASE CON LOS ATRIBUTOS
         setVisible(false);
-        module.setLayout(new GridLayout(2,1,0,5));
+        module.setLayout(new GridLayout(3,1,0,5));
+              
+        boton_altas = new JButton("INVENTARIOS ALTAS");
+        boton_altas.setPreferredSize(new Dimension(460, 50));
+        boton_altas.addActionListener(this);
         
-        //SE CREAN LOS BOTONES PARA EL MENU DE MODULO
-        boton_personal = new JButton("PERSONAL");
-        boton_personal.setPreferredSize(new Dimension(460, 50));
-        boton_personal.addActionListener(this);
+        boton_bajas = new JButton("INVENTARIOS BAJAS");
+        boton_bajas.setPreferredSize(new Dimension(460, 50));
+        boton_bajas.addActionListener(this);
         
-        boton_area = new JButton("AREA");
-        boton_area.setPreferredSize(new Dimension(460, 50));
-        boton_area.addActionListener(this);
+        boton_modificaciones = new JButton("INVENTARIOS MODIFICACIONES");
+        boton_modificaciones.setPreferredSize(new Dimension(460, 50));
+        boton_modificaciones.addActionListener(this);
         
         salir_boton = new JButton("Salir");
         salir_boton.addActionListener(this);
         salir_boton.setVisible(false);
+                
+        module.add(boton_altas);
+        module.add(boton_bajas);
+        module.add(boton_modificaciones);
         
-        //SE AGREGAN LOS BOTONES AL MODULO
-        module.add(boton_personal);
-        module.add(boton_area);
-        
-        //SE AGREGAN TODOS LOS ELEMENTOS A LA VENTANA PRINCIPAL DEL MODULO
         add(module);
-        add(personal);
-        add(area);
+        add(altas);
+        add(bajas);
+        add(modificaciones);
         add(salir_boton);
     }
 
-    //SE AGREGAN LAS ACCIONES A LOS BOTONES PARA OCULTAR O MOSTRAR LOS ELEMENTOS
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==boton_personal){
-            System.out.println("Nomina personal clicked");
+        if(e.getSource()==boton_altas){
+            System.out.println("inventarios altas clicked");
             module.setVisible(false);
-            area.setVisible(false);
-            personal.setVisible(true);
+            modificaciones.setVisible(false);
+            altas.setVisible(true);
             salir_boton.setVisible(true);
             
         }
-        if(e.getSource()==boton_area){
-            System.out.println("Nomina area clicked");
+        if(e.getSource()==boton_bajas){
+            System.out.println("inventarios bajas clicked");
             module.setVisible(false);
-            personal.setVisible(false);
-            area.setVisible(true);
+            altas.setVisible(false);
+            modificaciones.setVisible(false);
+            bajas.setVisible(true);
             salir_boton.setVisible(true);
         }
+        if(e.getSource()==boton_modificaciones){
+            System.out.println("inventarios modificaciones clicked");
+            module.setVisible(false);
+            altas.setVisible(false);
+            bajas.setVisible(false);
+            salir_boton.setVisible(true);
+            modificaciones.setVisible(true);
+        }
         if(e.getSource()==salir_boton){
-            System.out.println("Nomina salir clicked");
-            personal.setVisible(false);
-            area.setVisible(false);
+            System.out.println("inventarios salir clicked");
+            altas.setVisible(false);
+            modificaciones.setVisible(false);
+            bajas.setVisible(false);
             module.setVisible(true);
             salir_boton.setVisible(false);
         }

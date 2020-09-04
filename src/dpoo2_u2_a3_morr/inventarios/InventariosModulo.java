@@ -1,11 +1,9 @@
 package dpoo2_u2_a3_morr.inventarios;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -35,11 +33,8 @@ public class InventariosModulo extends JPanel implements ActionListener{
         
         salir_boton = new JButton("Salir");
         salir_boton.addActionListener(this);
-        //salir_boton.setPreferredSize(new Dimension(50, 60));
-        //salir_boton.setIcon(new ImageIcon(Class.class.getResource("/img/salir2.png")));
         salir_boton.setVisible(false);
-        
-        
+                
         module.add(boton_altas);
         module.add(boton_bajas);
         module.add(boton_modificaciones);
