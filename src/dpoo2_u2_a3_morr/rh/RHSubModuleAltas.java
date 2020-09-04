@@ -148,7 +148,7 @@ public class RHSubModuleAltas extends JPanel implements ActionListener{
             String nacimiento = nacimiento_field.getText();
             String curp  = CURP_field.getText();
             String rfc = RFC_field.getText();
-            int sueldo = Integer.parseInt(sueldo_field.getText());
+            float sueldo = Float.parseFloat(sueldo_field.getText());
             String puesto = puesto_field.getText();
             String sucursal = sucursal_field.getText();
             String ingreso = ingreso_field.getText();

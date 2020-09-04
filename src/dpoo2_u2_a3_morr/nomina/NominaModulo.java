@@ -1,8 +1,5 @@
 package dpoo2_u2_a3_morr.nomina;
 
-import dpoo2_u2_a3_morr.inventarios.InventariosSubModuleAltas;
-import dpoo2_u2_a3_morr.inventarios.InventariosSubModuloBajas;
-import dpoo2_u2_a3_morr.inventarios.InventariosSubModuloModificaciones;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,23 +12,23 @@ public class NominaModulo extends JPanel implements ActionListener{
     //SE CREA EL CONTENEDOR DEL MENU DEL MODULO
     public JPanel module = new JPanel();
     JButton boton_altas, boton_bajas, boton_modificaciones, salir_boton;
-    InventariosSubModuleAltas altas = new InventariosSubModuleAltas();
-    InventariosSubModuloModificaciones modificaciones = new InventariosSubModuloModificaciones();
-    InventariosSubModuloBajas bajas = new InventariosSubModuloBajas();    
+    NominaSubModuloAltas altas = new NominaSubModuloAltas();
+    NominaSubModuloModificaciones modificaciones = new NominaSubModuloModificaciones();
+    NominaSubModuloBajas bajas = new NominaSubModuloBajas();    
     
     public NominaModulo(){
         setVisible(false);
         module.setLayout(new GridLayout(3,1,0,5));
               
-        boton_altas = new JButton("INVENTARIOS ALTAS");
+        boton_altas = new JButton("NOMINA ALTAS");
         boton_altas.setPreferredSize(new Dimension(460, 50));
         boton_altas.addActionListener(this);
         
-        boton_bajas = new JButton("INVENTARIOS BAJAS");
+        boton_bajas = new JButton("NOMINA BAJAS");
         boton_bajas.setPreferredSize(new Dimension(460, 50));
         boton_bajas.addActionListener(this);
         
-        boton_modificaciones = new JButton("INVENTARIOS MODIFICACIONES");
+        boton_modificaciones = new JButton("NOMINA MODIFICACIONES");
         boton_modificaciones.setPreferredSize(new Dimension(460, 50));
         boton_modificaciones.addActionListener(this);
         
@@ -53,7 +50,7 @@ public class NominaModulo extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==boton_altas){
-            System.out.println("inventarios altas clicked");
+            System.out.println("Nomina altas clicked");
             module.setVisible(false);
             modificaciones.setVisible(false);
             altas.setVisible(true);
@@ -61,7 +58,7 @@ public class NominaModulo extends JPanel implements ActionListener{
             
         }
         if(e.getSource()==boton_bajas){
-            System.out.println("inventarios bajas clicked");
+            System.out.println("Nomina bajas clicked");
             module.setVisible(false);
             altas.setVisible(false);
             modificaciones.setVisible(false);
@@ -69,7 +66,7 @@ public class NominaModulo extends JPanel implements ActionListener{
             salir_boton.setVisible(true);
         }
         if(e.getSource()==boton_modificaciones){
-            System.out.println("inventarios modificaciones clicked");
+            System.out.println("Nomina modificaciones clicked");
             module.setVisible(false);
             altas.setVisible(false);
             bajas.setVisible(false);

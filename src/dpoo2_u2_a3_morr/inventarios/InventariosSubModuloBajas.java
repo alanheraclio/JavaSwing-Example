@@ -118,20 +118,12 @@ public class InventariosSubModuloBajas extends JPanel implements ActionListener{
                 sucursal_field.setText(datos[3]);
                 existencia_field.setText(datos[4]);
                 marca_field.setText(datos[5]);
-                articulo_field.setEditable(true);
-                sucursal_field.setEditable(true);
-                existencia_field.setEditable(true);
-                marca_field.setEditable(true);
             }
             else {
                 articulo_field.setText(null);
                 sucursal_field.setText(null);
                 existencia_field.setText(null);
                 marca_field.setText(null);
-                articulo_field.setEditable(false);
-                sucursal_field.setEditable(false);
-                existencia_field.setEditable(false);
-                marca_field.setEditable(false);
             }
         }
         if(e.getSource()==borrar_boton){

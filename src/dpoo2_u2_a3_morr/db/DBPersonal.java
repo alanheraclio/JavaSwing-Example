@@ -60,7 +60,7 @@ public class DBPersonal extends DBConexion{
         }
     }
     //SE CREA UN METODO PARA INSERTAR DATOS A LA TABLA INVENTARIOS
-    public static void insertarPersonal(int numero_empleado, String nombre, String apellidos, String fecha_nacimiento, String curp, String rfc, int sueldo, String puesto, String sucursal, String fecha_ingreso){
+    public static void insertarPersonal(int numero_empleado, String nombre, String apellidos, String fecha_nacimiento, String curp, String rfc, float sueldo, String puesto, String sucursal, String fecha_ingreso){
         //UTILIZA EL METODO DE CONEXION DE LA CALSE PADRE
         Connection connect = getConnection();
         PreparedStatement ps;
@@ -75,7 +75,7 @@ public class DBPersonal extends DBConexion{
             ps.setString(4, fecha_nacimiento);
             ps.setString(5, apellidos);
             ps.setString(6, rfc);
-            ps.setInt(7, sueldo);   
+            ps.setFloat(7, sueldo);   
             ps.setString(8, puesto);
             ps.setString(9, sucursal);
             ps.setString(10, fecha_nacimiento);           
@@ -103,7 +103,7 @@ public class DBPersonal extends DBConexion{
     }
  
     //SE CREA UN METODO PARA ACTUALIZAR DATOS A LA TABLA INVENTARIOS
-    public static void actualizarPersonal(int numero_empleado, String nombre, String apellidos, String fecha_nacimiento, String curp, String rfc, int sueldo, String puesto, String sucursal, String fecha_ingreso, int id){
+    public static void actualizarPersonal(int numero_empleado, String nombre, String apellidos, String fecha_nacimiento, String curp, String rfc, float sueldo, String puesto, String sucursal, String fecha_ingreso, int id){
            //UTILIZA EL METODO DE CONEXION DE LA CALSE PADRE
            Connection connect = getConnection();
            PreparedStatement ps;
@@ -119,7 +119,7 @@ public class DBPersonal extends DBConexion{
                ps.setString(4, fecha_nacimiento);
                ps.setString(5, curp); 
                ps.setString(6, rfc);
-               ps.setInt(7, sueldo);  
+               ps.setFloat(7, sueldo);  
                ps.setString(8, puesto); 
                ps.setString(9, sucursal);
                ps.setString(10, fecha_ingreso);      
@@ -149,15 +149,15 @@ public class DBPersonal extends DBConexion{
        }
     
     //SE CREA UN METODO PARA BORRAR DATOS A LA TABLA INVENTARIOS
-    public static void borrarPersonal(int id){
+    public static void borrarPersonal(int numero){
            //UTILIZA EL METODO DE CONEXION DE LA CALSE PADRE
            Connection connect = getConnection();
            PreparedStatement ps;
 
            try {
                //INTENTA BORRAR LOS DATOS CON EL QUERY
-               ps = connect.prepareStatement("DELETE FROM personal WHERE id=?");
-               ps.setInt(1, id);
+               ps = connect.prepareStatement("DELETE FROM personal WHERE numero_empleado=?");
+               ps.setInt(1, numero);
 
                int res = ps.executeUpdate();
                if (res > 0) {

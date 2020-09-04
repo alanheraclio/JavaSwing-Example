@@ -150,6 +150,15 @@ public class RHSubModuloModificaciones extends JPanel implements ActionListener{
         puesto_field.setText(null);
         sucursal_field.setText(null);
         ingreso_field.setText(null);
+        nombre_field.setEditable(false);
+        apellidos_field.setEditable(false);
+        nacimiento_field.setEditable(false);
+        CURP_field.setEditable(false);
+        RFC_field.setEditable(false);
+        sueldo_field.setEditable(false);
+        puesto_field.setEditable(false);
+        sucursal_field.setEditable(false);
+        ingreso_field.setEditable(false);
     }
 
     //SE AGREGAN LAS ACCIONES A LOS BOTONES
@@ -184,25 +193,8 @@ public class RHSubModuloModificaciones extends JPanel implements ActionListener{
                 ingreso_field.setEditable(true);
             }
             else {
-                numero_field.setText(null);
-                nombre_field.setText(null);
-                apellidos_field.setText(null);
-                nacimiento_field.setText(null);
-                CURP_field.setText(null);
-                RFC_field.setText(null);
-                sueldo_field.setText(null);
-                puesto_field.setText(null);
-                sucursal_field.setText(null);
-                ingreso_field.setText(null);
-                nombre_field.setEditable(false);
-                apellidos_field.setEditable(false);
-                nacimiento_field.setEditable(false);
-                CURP_field.setEditable(false);
-                RFC_field.setEditable(false);
-                sueldo_field.setEditable(false);
-                puesto_field.setEditable(false);
-                sucursal_field.setEditable(false);
-                ingreso_field.setEditable(false);
+                LimpiarFormulario();
+                
             }
         }
         if(e.getSource()==guardar_boton){
@@ -215,7 +207,7 @@ public class RHSubModuloModificaciones extends JPanel implements ActionListener{
             String nacimiento = nacimiento_field.getText();
             String curp  = CURP_field.getText();
             String rfc = RFC_field.getText();
-            int sueldo = Integer.parseInt(sueldo_field.getText());
+            float sueldo = Float.parseFloat(sueldo_field.getText());
             String puesto = puesto_field.getText();
             String sucursal = sucursal_field.getText();
             String ingreso = ingreso_field.getText();

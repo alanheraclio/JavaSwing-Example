@@ -54,7 +54,7 @@ public class DBNomina extends DBConexion{
         }
     }
     //SE CREA UN METODO PARA INSERTAR DATOS A LA TABLA INVENTARIOS
-    public static void insertarNomina(int matricula, String area, int salario, int incentivo, int dias, int descuentos, int total){
+    public static void insertarNomina(int matricula, String area, float salario, float incentivo, int dias, float descuentos, float total){
         //UTILIZA EL METODO DE CONEXION DE LA CALSE PADRE
         Connection connect = getConnection();
         PreparedStatement ps;
@@ -65,11 +65,11 @@ public class DBNomina extends DBConexion{
             //SE INSERTA CADA VALOR QUE ENVIA EL FORMULARIO EN EL QUERY
             ps.setInt(1, matricula);
             ps.setString(2, area);
-            ps.setInt(3, salario);
-            ps.setInt(4, incentivo);
-            ps.setInt(5, salario);
-            ps.setInt(6, descuentos);
-            ps.setInt(7, total);            
+            ps.setFloat(3, salario);
+            ps.setFloat(4, incentivo);
+            ps.setInt(5, dias);
+            ps.setFloat(6, descuentos);
+            ps.setFloat(7, total);            
             int res = ps.executeUpdate();
             if (res > 0) {
                 //SI LA INSERCION ES EXITOSA ENVIA ESTE MENSAJE
@@ -94,7 +94,7 @@ public class DBNomina extends DBConexion{
     }
  
     //SE CREA UN METODO PARA ACTUALIZAR DATOS A LA TABLA INVENTARIOS
-    public static void actualizarNomina(int matricula, String area, int salario, int incentivo, int dias, int descuentos, int total, int id){
+    public static void actualizarNomina(int matricula, String area, float salario, float incentivo, int dias, float descuentos, float total, int id){
            //UTILIZA EL METODO DE CONEXION DE LA CALSE PADRE
            Connection connect = getConnection();
            PreparedStatement ps;
@@ -106,11 +106,11 @@ public class DBNomina extends DBConexion{
 
                ps.setInt(1, matricula);
                ps.setString(2, area);
-               ps.setInt(3, salario);
-               ps.setInt(4, incentivo);
+               ps.setFloat(3, salario);
+               ps.setFloat(4, incentivo);
                ps.setInt(5, dias); 
-               ps.setInt(6, descuentos);
-               ps.setInt(7, total);     
+               ps.setFloat(6, descuentos);
+               ps.setFloat(7, total);     
                ps.setInt(8, id);
 
                int res = ps.executeUpdate();
@@ -137,15 +137,15 @@ public class DBNomina extends DBConexion{
        }
     
     //SE CREA UN METODO PARA BORRAR DATOS A LA TABLA INVENTARIOS
-    public static void borrarNomina(int id){
+    public static void borrarNomina(int matricula){
            //UTILIZA EL METODO DE CONEXION DE LA CALSE PADRE
            Connection connect = getConnection();
            PreparedStatement ps;
 
            try {
                //INTENTA BORRAR LOS DATOS CON EL QUERY
-               ps = connect.prepareStatement("DELETE FROM nomina WHERE id=?");
-               ps.setInt(1, id);
+               ps = connect.prepareStatement("DELETE FROM nomina WHERE matricula=?");
+               ps.setInt(1, matricula);
 
                int res = ps.executeUpdate();
                if (res > 0) {
