@@ -5,12 +5,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
-import java.text.MessageFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,45 +15,54 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 public class ConsultasModulo extends JPanel implements ActionListener{
-    
+    //SE CREAN LAS VARIABLES NECESARIAS PARA CREAR EL MODULO
     JLabel buscar_label;
     JTextField buscar_field;
-    JButton buscar_boton, eliminar_boton, imprimir_boton;   
+    JButton buscar_boton, actualizar_boton, eliminar_boton, imprimir_boton;   
     DBConsultas db = new DBConsultas();
     JScrollPane tabla;
     JTable consultas_tabla;
     String[] columnas = {"NOMBRE", "APELLIDOS", "INCENTIVOS", "DECUENTOS", "TOTAL"}; 
     
-    
-    public void obtenerConsutlas(){      
+    //METODO PARA OBTNEER EL TOTAL DE REGISTROS DE LA BASE DE DATOS
+    public void obtenerConsutlas(){   
+        //SE USA LA CONEXION A LA BASE DE DATOS PARA OBTENER LOS VALORES Y SE ASEIGNAAN A LA TABLA
         Object[][] filas = db.obtenerConsultas();      
         consultas_tabla = new JTable(filas,columnas);
         tabla = new JScrollPane(consultas_tabla);
         this.add(tabla);          
     }
     
+    //METODO PARA OBTENER LOS VALORES DE LA BUSQUEDA DE LA BASE DE DATOS
     public void obtenerConsutlasBusqueda(String busqueda){
+        //SE USA LA CONEXION A LA BASE DE DATOS PARA OBTENER LOS VALORES Y SE ASEIGNAAN A LA TABLA
         Object[][] filas_busqueda = db.obtenerConsultasBusqueda(busqueda); 
-        JTable consultas_tabla = new JTable(filas_busqueda,columnas);
+        consultas_tabla = new JTable(filas_busqueda,columnas);
         tabla = new JScrollPane(consultas_tabla);
-        this.add(tabla);     
+        this.tabla = tabla;   
     }
     
+    //SE ASIGANAN LOS VALORES POR DEFAULT EN EL CONSTRUCTOR
     public ConsultasModulo(){
         setVisible(false);
         setPreferredSize(new Dimension(500, 500));
         setLayout(new FlowLayout());
         
-        //SE CREAN LAS ETIQUETAS DEL MODULO
-        buscar_label = new JLabel("Bucar por nombre:");
-        buscar_label.setPreferredSize(new Dimension(120, 20));
+        //SE CREAN LAS ETIQUETAS, CAMPOS Y BOTONES DEL MODULO
+        buscar_label = new JLabel("Nombre:");
+        buscar_label.setPreferredSize(new Dimension(70, 20));
         buscar_label.setHorizontalAlignment(SwingConstants.RIGHT);
         buscar_field = new JTextField(10);
               
         buscar_boton = new JButton("Buscar");
         buscar_boton.addActionListener(this);
-        buscar_boton.setPreferredSize(new Dimension(126, 30));
+        buscar_boton.setPreferredSize(new Dimension(110, 30));
         buscar_boton.setIcon(new ImageIcon(Class.class.getResource("/img/buscar2.png")));
+        
+        actualizar_boton = new JButton("Actualizar");
+        actualizar_boton.addActionListener(this);
+        actualizar_boton.setPreferredSize(new Dimension(140, 30));
+        actualizar_boton.setIcon(new ImageIcon(Class.class.getResource("/img/cargar2.png")));
                       
         eliminar_boton = new JButton("Borrar Consulta");
         eliminar_boton.addActionListener(this);
@@ -72,49 +78,16 @@ public class ConsultasModulo extends JPanel implements ActionListener{
         add(buscar_label);
         add(buscar_field);
         add(buscar_boton);
+        add(actualizar_boton);
         obtenerConsutlas();
         add(imprimir_boton);
         add(eliminar_boton);
-        
-    }
-    
-    public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog){        
-        boolean fitWidth = true;        
-        boolean interactive = true;
-        // We define the print mode (Definimos el modo de impresión)
-        JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-        try {
-            // Print the table (Imprimo la tabla)             
-            boolean complete = jTable.print(mode,
-                    new MessageFormat(header),
-                    new MessageFormat(footer),
-                    showPrintDialog,
-                    null,
-                    interactive);                 
-            if (complete) {
-                // Mostramos el mensaje de impresión existosa
-                JOptionPane.showMessageDialog(jTable,
-                        "Print complete (Impresión completa)",
-                        "Print result (Resultado de la impresión)",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                // Mostramos un mensaje indicando que la impresión fue cancelada                 
-                JOptionPane.showMessageDialog(jTable,
-                        "Print canceled (Impresión cancelada)",
-                        "Print result (Resultado de la impresión)",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (PrinterException pe) {
-            JOptionPane.showMessageDialog(jTable, 
-                    "Print fail (Fallo de impresión): " + pe.getMessage(), 
-                    "Print result (Resultado de la impresión)", 
-                    JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==buscar_boton){
+            //EL BOTON DE BUSCAR CREA UNA NUEVA TALBA CON LOS CAMPOS SELECCIONADOS, ELIMINA LA ANTERIOR Y REIMPRIME LA TABLA EN EL JPANEL
             System.out.println("Consultas buscar boton clicked");     
             this.remove(tabla);
             this.remove(imprimir_boton);
@@ -122,12 +95,28 @@ public class ConsultasModulo extends JPanel implements ActionListener{
             String busqueda = buscar_field.getText();
             System.out.println("busqueda: "+busqueda);     
             obtenerConsutlasBusqueda(busqueda);
+            add(tabla); 
+            add(imprimir_boton);
+            add(eliminar_boton);
+            this.revalidate();
+            this.repaint();
+        }
+        if(e.getSource()==actualizar_boton){
+            //EL BOTON DE ACTUALIZAR CREA UNA NUEVA TALBA CON EL TOTAL DE REGISTROS, ELIMINA LA ANTERIOR Y REIMPRIME LA TABLA EN EL JPANEL
+            System.out.println("Actualizar boton clicked");     
+            this.remove(tabla);
+            this.remove(imprimir_boton);
+            this.remove(eliminar_boton);  
+            buscar_field.setText(null);
+            obtenerConsutlas();
+            add(tabla); 
             add(imprimir_boton);
             add(eliminar_boton);
             this.revalidate();
             this.repaint();
         }
         if(e.getSource()==eliminar_boton){
+            //EL BOTON ELIMINAR ELIMINA LA BUSQUEDA Y VUELVE A IMPRIMIR EL TOTAL 
             System.out.println("Consultas eliminar boton clicked");
             buscar_field.setText(null);
             this.remove(tabla);
@@ -138,11 +127,9 @@ public class ConsultasModulo extends JPanel implements ActionListener{
             this.repaint();
         }
         if(e.getSource()==imprimir_boton){
+            //EL BOTON IMPRIMIR IMPRIME LA TABLA MOSTRADA EN EL JPANEL LLAMANDO A LA CLASE IMPRIMIR CONSULTAS
             System.out.println("Consultas imprimir boton clicked");
-            MessageFormat headerFormat = new MessageFormat("MI CABECERA");
-            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
-            //tabla.print(PrintMode.FIT_WIDTH, headerFormat, footerFormat);
-            utilJTablePrint(consultas_tabla, "header", "footer", true);
+            ImprimirConsultas.imprimirTabla(this.consultas_tabla);
         }
     }
     
