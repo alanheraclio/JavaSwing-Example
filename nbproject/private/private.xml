@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U2_A3_MORR/src/dpoo2_u2_a3_morr/db/DBConexion.java</file>
-            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U2_A3_MORR/src/dpoo2_u2_a3_morr/db/DBInventarios.java</file>
-            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U2_A3_MORR/src/dpoo2_u2_a3_morr/inventarios/InventariosModulo.java</file>
-            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U2_A3_MORR/src/dpoo2_u2_a3_morr/inventarios/InventariosSubModuleAltas.java</file>
-            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U2_A3_MORR/src/dpoo2_u2_a3_morr/nomina/NominaSubModuloAltas.java</file>
-            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U2_A3_MORR/src/dpoo2_u2_a3_morr/db/DBPersonal.java</file>
-            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U2_A3_MORR/src/dpoo2_u2_a3_morr/rh/RHSubModuloBajas.java</file>
+            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U3_EA_MORR/src/dpoo2_u2_ea_morr/db/DBConsultas.java</file>
+            <file>file:/C:/Users/x0269797/Documents/NetBeansProjects/DPOO2_U3_EA_MORR/src/dpoo2_u2_ea_morr/consultas/ConsultasModulo.java</file>
         </group>
     </open-files>
 </project-private>
