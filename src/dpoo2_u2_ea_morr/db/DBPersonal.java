@@ -21,18 +21,7 @@ public class DBPersonal extends DBConexion{
             res = ps.executeQuery();
             
             if (res.next()) {
-                System.out.println("id:"+res.getString("id"));
-                System.out.println("numero_empleado:"+res.getString("numero_empleado"));
-                System.out.println("nombre:"+res.getString("nombre"));
-                System.out.println("apellidos:"+res.getString("apellidos"));
-                System.out.println("fecha_nacimiento:"+res.getString("fecha_nacimiento"));
-                System.out.println("curp:"+res.getString("curp"));
-                System.out.println("rfc:"+res.getString("rfc"));
-                System.out.println("sueldo:"+res.getString("sueldo"));
-                System.out.println("puesto:"+res.getString("puesto"));
-                System.out.println("sucursal:"+res.getString("sucursal"));
-                System.out.println("fecha_ingreso:"+res.getString("fecha_ingreso"));
-                
+                //SE AGREGAN TODOS LOS RESULTADOS A LA VARIABLE DATOS                
                 datos[0] = res.getString("id");
                 datos[1] = res.getString("numero_empleado");
                 datos[2] = res.getString("nombre");

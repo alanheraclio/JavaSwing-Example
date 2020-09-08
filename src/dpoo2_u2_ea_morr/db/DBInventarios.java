@@ -21,12 +21,6 @@ public class DBInventarios extends DBConexion{
             res = ps.executeQuery();
             
             if (res.next()) {
-                System.out.println("id:"+res.getString("id"));
-                System.out.println("codigo:"+res.getString("codigo"));
-                System.out.println("articulo:"+res.getString("articulo"));
-                System.out.println("sucursal:"+res.getString("sucursal"));
-                System.out.println("existencia:"+res.getString("existencia"));
-                System.out.println("marca:"+res.getString("marca"));
                 
                 datos[0] = res.getString("id");
                 datos[1] = res.getString("codigo");

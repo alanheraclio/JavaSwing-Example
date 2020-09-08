@@ -21,15 +21,7 @@ public class DBNomina extends DBConexion{
             res = ps.executeQuery();
             
             if (res.next()) {
-                System.out.println("id:"+res.getString("id"));
-                System.out.println("matricula:"+res.getString("matricula"));
-                System.out.println("area:"+res.getString("area"));
-                System.out.println("salario:"+res.getString("salario"));
-                System.out.println("incentivo:"+res.getString("incentivo"));
-                System.out.println("dias:"+res.getString("dias"));
-                System.out.println("descuentos:"+res.getString("descuentos"));
-                System.out.println("total:"+res.getString("total"));
-                
+               
                 datos[0] = res.getString("id");
                 datos[1] = res.getString("matricula");
                 datos[2] = res.getString("area");

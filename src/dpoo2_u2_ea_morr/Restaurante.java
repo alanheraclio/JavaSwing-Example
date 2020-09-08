@@ -4,7 +4,6 @@ import dpoo2_u2_ea_morr.inventarios.InventariosModulo;
 import dpoo2_u2_ea_morr.rh.RHModulo;
 import dpoo2_u2_ea_morr.nomina.NominaModulo;
 import dpoo2_u2_ea_morr.consultas.ConsultasModulo;
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
