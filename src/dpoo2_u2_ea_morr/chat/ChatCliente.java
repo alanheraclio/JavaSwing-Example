@@ -48,12 +48,11 @@ public class ChatCliente {
         ventana.setVisible(true);
         ventana.setResizable(false); 
         
-        /*boton_enviar.addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent e){
-               System.out.println("cliente boton enviar clicked");
-              }            
-          });*/
-        
+        correrHilos();
+    } 
+    
+    public void correrHilos(){
+        System.out.println("correr hilos cliente corriendo...");
         Thread main = new Thread(new Runnable() {
             public void run() {
                 try {
@@ -66,7 +65,8 @@ public class ChatCliente {
                 }
             }
         });
-    } 
+        main.start();
+    }
     
     public void leerMensaje(){
         Thread leer_hilo = new Thread(new Runnable(){
@@ -76,7 +76,7 @@ public class ChatCliente {
                 lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 while(true){
                     String mensaje_recibido = lector.readLine();
-                    mensaje_area.append("Servidor dice: "+mensaje_recibido);
+                    mensaje_area.append("Servidor dice: "+mensaje_recibido+"\n");
                 }
 
                 } catch (Exception e) {
@@ -93,12 +93,12 @@ public class ChatCliente {
             public void run() {
                 try {
                     escritor = new PrintWriter(socket.getOutputStream(),true);
-                    escritor.println("hola");
                     boton_enviar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
                             String mensaje = mensaje_field.getText();
                             escritor.println(mensaje);
                             mensaje_field.setText(null);
+                            mensaje_area.append("Cliente dice: "+mensaje+"\n");
                             System.out.println("cliente boton enviar clicked");
                         }            
                     });

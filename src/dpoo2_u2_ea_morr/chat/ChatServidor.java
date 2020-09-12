@@ -51,12 +51,19 @@ public class ChatServidor {
         ventana.setVisible(true);
         ventana.setResizable(false); 
         
-        Thread main = new Thread(new Runnable() {
+        correrHilos();        
+
+    }   
+    
+    public void correrHilos(){
+        System.out.println("correr hilos server corriendo...");
+
+            Thread main = new Thread(new Runnable() {
             public void run() {
-                try {
-                    try {
+                     try {
                         servidor = new ServerSocket(9000);
                         while(true){
+                            System.out.println("hilo main corriendo... ");
                             socket = servidor.accept();
                             leerMensaje();
                             escribirMensaje();
@@ -64,45 +71,44 @@ public class ChatServidor {
                     } catch (Exception e) {
                         System.out.println("error al conectarse al puerto: "+e);
                     }
-                    
-                } catch (Exception e) {
-                    System.out.println("error al correr socket: "+e);
-                }
             }
         });
-        main.start();
-    }   
+        main.start();   
+  }
     
     public void leerMensaje(){
         Thread leer_hilo = new Thread(new Runnable(){
             public void run(){
-                
+                System.out.println("hilo leer corriendo... ");
                 try {
-                lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                while(true){
-                    String mensaje_recibido = lector.readLine();
-                    mensaje_area.append("Cliente dice: "+mensaje_recibido);
-                }
+                    System.out.println("hilo leer try corriendo... ");
+                    lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    while(true){
+                        String mensaje_recibido = lector.readLine();
+                        mensaje_area.append("Cliente dice: "+mensaje_recibido+"\n");
+                    }
 
                 } catch (Exception e) {
                     System.out.println("chat error al leer"+e);
                 }
-            
             }
         });
         leer_hilo.start();
     }
-    
+        
     public void escribirMensaje(){
         Thread escribir_hilo = new Thread(new Runnable() {
             public void run() {
+                System.out.println("hilo escribir corriendo... ");
                 try {
+                    System.out.println("hilo escribir try corriendo... ");
                     escritor = new PrintWriter(socket.getOutputStream(),true);
                     boton_enviar.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e){
                             String mensaje = mensaje_field.getText();
                             escritor.println(mensaje);
                             mensaje_field.setText(null);
+                            mensaje_area.append("Servidor dice: "+mensaje+"\n");
                             System.out.println("servidor boton enviar clicked");
                         }            
                     });
