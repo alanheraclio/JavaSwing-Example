@@ -1,5 +1,7 @@
 package dpoo2_u2_ea_morr;
 
+import dpoo2_u2_ea_morr.chat.ChatCliente;
+import dpoo2_u2_ea_morr.chat.ChatServidor;
 import dpoo2_u2_ea_morr.inventarios.InventariosModulo;
 import dpoo2_u2_ea_morr.rh.RHModulo;
 import dpoo2_u2_ea_morr.nomina.NominaModulo;
@@ -9,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,14 +24,15 @@ public class Restaurante extends JFrame implements ActionListener{
     RHModulo rh = new RHModulo();
     NominaModulo nomina = new NominaModulo();
     ConsultasModulo reportes = new ConsultasModulo();
-    JButton boton_inventarios, boton_rh, boton_nomina, boton_consultas;
+    JButton boton_inventarios, boton_rh, boton_nomina, boton_consultas, boton_chat;
     JLabel titulo_panel;
     //CONTRUCTOR QUE ASIGNA LOS VALORES INICALES
     Restaurante(){
         setVisible(true);
         setBounds(700, 100, 500, 800);
         setTitle("Restaurante");
-        setDefaultCloseOperation(Restaurante.DISPOSE_ON_CLOSE);
+        //setDefaultCloseOperation(Restaurante.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(Restaurante.EXIT_ON_CLOSE);
              
         Container contentpane = getContentPane();        
         contentpane.setLayout(new FlowLayout());
@@ -38,16 +42,22 @@ public class Restaurante extends JFrame implements ActionListener{
         boton_inventarios.setPreferredSize(new Dimension(230, 30));
         boton_rh = new JButton("Recursos Humanos");
         boton_rh.setPreferredSize(new Dimension(230, 30));
+        
         boton_nomina = new JButton("Nomina");
         boton_nomina.setPreferredSize(new Dimension(230, 30));
         boton_consultas = new JButton("Consultas");
         boton_consultas.setPreferredSize(new Dimension(230, 30));
+       
+        boton_chat = new JButton("Chat");
+        boton_chat.setPreferredSize(new Dimension(460, 30));
+        boton_chat.setIcon(new ImageIcon(Class.class.getResource("/img/chat2.png")));
         
         boton_inventarios.addActionListener(this);
         boton_rh.addActionListener(this);
         boton_nomina.addActionListener(this);
         boton_consultas.addActionListener(this);
-        
+        boton_chat.addActionListener(this);
+               
         titulo_panel = new JLabel("Seleccione una Opcion");
         titulo_panel.setPreferredSize(new Dimension(460, 50));
         titulo_panel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -56,7 +66,8 @@ public class Restaurante extends JFrame implements ActionListener{
         contentpane.add(boton_inventarios);
         contentpane.add(boton_rh);
         contentpane.add(boton_nomina);
-        contentpane.add(boton_consultas);      
+        contentpane.add(boton_consultas);    
+        contentpane.add(boton_chat);  
         
         contentpane.add(titulo_panel);
         
@@ -105,6 +116,12 @@ public class Restaurante extends JFrame implements ActionListener{
             rh.setVisible(false);
             inventarios.setVisible(false);
             reportes.setVisible(true);
+        }
+        if(e.getSource()==boton_chat){
+            System.out.println("chat clicked");
+            new ChatServidor();
+            new ChatCliente();
+            
         }
         
     }
